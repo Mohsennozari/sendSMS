@@ -6,6 +6,7 @@
     <title>مدیریت پیامک‌ها و شماره‌های تلفن</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.fontiran.com/vazir.css" rel="stylesheet"> <!-- لینک به فونت Vazir -->
+    <script src="https://cdn.jsdelivr.net/npm/jalali-moment@3.3.3/min/jquery.jalali-moment.min.js"></script> <!-- جالالی مومنت برای تاریخ شمسی -->
     <style>
         body {
             font-family: 'Vazir', Arial, sans-serif;
@@ -23,14 +24,24 @@
 
         h1 {
             font-size: 3rem;
+            font-weight: bold; /* افزودن ضخامت به متن */
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            text-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.1),
+                0 0 10px #ffcc00, /* اضافه کردن چراغ زرد در اطراف متن */
+                0 0 20px #ffcc00,
+                0 0 30px #ffcc00; /* ایجاد اثر چراغی قوی‌تر */
             transform: rotateX(10deg) rotateY(-5deg); /* ایجاد اثر سه بعدی برای عنوان */
-            transition: transform 0.5s ease;
+            transition: transform 0.5s ease, text-shadow 0.5s ease;
         }
 
         h1:hover {
             transform: rotateX(15deg) rotateY(-10deg); /* حرکت بیشتر در حالت هاور */
+            text-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.1),
+                0 0 20px #ffcc00, /* افزایش نور در حالت هاور */
+                0 0 40px #ffcc00,
+                0 0 60px #ffcc00; /* ایجاد اثر چراغی قوی‌تر */
         }
 
         input {
@@ -165,6 +176,9 @@
         <button onclick="sendSMS('سلام مامان، تعطیل شدم!')">
             ارسال پیام «تعطیل شدم» ⏰
         </button>
+        <button onclick="sendCustomSMS()">
+            ارسال پیام با زمان و تاریخ 📅
+        </button>
     </div>
 
     <script>
@@ -242,6 +256,25 @@
                 alert('لطفاً شماره تلفن را اضافه کنید.');
                 return;
             }
+            const url = `sms:${selectedPhoneNumber}?body=${encodeURIComponent(message)}`;
+            window.location.href = url; // Redirect to SMS app
+        }
+
+        // Function to send custom SMS with date and time
+        function sendCustomSMS() {
+            const selectedPhoneNumber = phoneNumbers[0];
+            if (!selectedPhoneNumber) {
+                alert('لطفاً شماره تلفن را اضافه کنید.');
+                return;
+            }
+
+            const now = jalaliMoment().locale('fa'); // Get current Jalali date and time
+            const dayOfWeek = now.format('dddd'); // Day of the week
+            const jalaliDate = now.format('jYYYY/jMM/jDD'); // Jalali date
+            const time = now.format('HH:mm'); // Current time
+
+            const message = `در ${dayOfWeek}، تاریخ ${jalaliDate} ساعت ${time} این پیام ارسال شده است.`;
+
             const url = `sms:${selectedPhoneNumber}?body=${encodeURIComponent(message)}`;
             window.location.href = url; // Redirect to SMS app
         }
