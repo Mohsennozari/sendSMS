@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>پیامک خودکار</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,9 +14,25 @@
             justify-content: center;
             height: 100vh;
             background-color: #f4f4f4;
+            margin: 0;
         }
         h1 {
             margin-bottom: 20px;
+            color: #333;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 250px;
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         button {
             padding: 10px 20px;
@@ -26,26 +43,125 @@
             border-radius: 5px;
             background-color: #007BFF;
             color: white;
+            transition: background-color 0.3s;
+            width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         button:hover {
             background-color: #0056b3;
         }
+        .button-icon {
+            margin-left: 8px;
+        }
+        .phone-list {
+            margin-top: 20px;
+            width: 300px;
+        }
+        .phone-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: #fff;
+        }
+        .phone-item input[type="text"] {
+            width: 70%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .phone-item button {
+            width: auto;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
-
     <h1>وضعیت خود را انتخاب کنید:</h1>
-    <button onclick="sendSMS('سلام مامان رسیدم دانشگاه')">رسیدم</button>
-    <button onclick="sendSMS('سلام مامان تعطیل شدم')">تعطیل شدم</button>
-    <button onclick="sendSMS('سلام مامان من در کلاسم')">کلاس هستم</button>
-    <script>
-        const phoneNumber = '09337734931'; // شماره ثبت شده
+    
+    <!-- Input for adding new phone number -->
+    <input type="text" id="newPhoneNumber" placeholder="شماره تلفن جدید را وارد کنید">
+    <button onclick="addPhoneNumber()">افزودن شماره</button>
 
+    <!-- List of phone numbers -->
+    <div class="phone-list" id="phoneList"></div>
+
+    <div class="button-container">
+        <button onclick="sendSMS('سلام مامان، رسیدم!')">
+            رسیدم <i class="fas fa-check button-icon"></i>
+        </button>
+        <button onclick="sendSMS('سلام مامان، تعطیل شدم!')">
+            تعطیل شدم <i class="fas fa-clock button-icon"></i>
+        </button>
+    </div>
+
+    <script>
+        // Array to store phone numbers
+        let phoneNumbers = ['09337734931'];
+
+        // Function to add a new phone number
+        function addPhoneNumber() {
+            const newPhoneNumber = document.getElementById('newPhoneNumber').value.trim();
+            if (newPhoneNumber) {
+                phoneNumbers.push(newPhoneNumber);
+                renderPhoneList();
+                document.getElementById('newPhoneNumber').value = ''; // Clear input field
+            }
+        }
+
+        // Function to remove a phone number
+        function removePhoneNumber(index) {
+            phoneNumbers.splice(index, 1);
+            renderPhoneList();
+        }
+
+        // Function to update the phone number list in the UI
+        function renderPhoneList() {
+            const phoneListContainer = document.getElementById('phoneList');
+            phoneListContainer.innerHTML = ''; // Clear previous list
+
+            phoneNumbers.forEach((phoneNumber, index) => {
+                const phoneItem = document.createElement('div');
+                phoneItem.className = 'phone-item';
+
+                const phoneInput = document.createElement('input');
+                phoneInput.type = 'text';
+                phoneInput.value = phoneNumber;
+                phoneInput.oninput = () => updatePhoneNumber(index, phoneInput.value);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'حذف';
+                deleteButton.style.backgroundColor = '#e74c3c';
+                deleteButton.onclick = () => removePhoneNumber(index);
+
+                phoneItem.appendChild(phoneInput);
+                phoneItem.appendChild(deleteButton);
+                phoneListContainer.appendChild(phoneItem);
+            });
+        }
+
+        // Function to update a phone number in the array
+        function updatePhoneNumber(index, newNumber) {
+            phoneNumbers[index] = newNumber;
+        }
+
+        // Initialize the phone list when the page loads
+        renderPhoneList();
+
+        // Function to send SMS
         function sendSMS(message) {
-            const url = `sms:${phoneNumber}?body=${encodeURIComponent(message)}`;
-            window.location.href = url; // هدایت به برنامه پیامک
+            const selectedPhoneNumber = phoneNumbers[0]; // Use the first number by default
+            if (!selectedPhoneNumber) return;
+
+            const url = `sms:${selectedPhoneNumber}?body=${encodeURIComponent(message)}`;
+            window.location.href = url; // Redirect to SMS app
         }
     </script>
-
 </body>
 </html>
