@@ -3,69 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مدیریت پیامک‌ها و شماره‌های تلفن</title>
+    <title>پیامک سریع</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.fontiran.com/vazir.css" rel="stylesheet"> <!-- لینک به فونت Vazir -->
     <script src="https://cdn.jsdelivr.net/npm/jalali-moment@3.3.3/min/jquery.jalali-moment.min.js"></script> <!-- جالالی مومنت برای تاریخ شمسی -->
     <style>
+        *{
+           font-family: 'Vazir', sans-serif;
+           border-radius: 10px;
+        }
         body {
-            font-family: 'Vazir', Arial, sans-serif;
+            font-family: 'Vazir', sans-serif; /* استفاده از فونت وزیر برای تمام متن‌ها */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #f7d794, #f0a500);
+            min-height: 100vh;
+            background: #f0f0f0; /* رنگ پس‌زمینه ملایم */
             margin: 0;
             color: #333;
-            font-size: 20px;
-            perspective: 1000px; /* ایجاد اثر سه بعدی */
+            font-size: 18px;
+            padding: 20px;
         }
 
         h1 {
-            font-size: 3rem;
-            font-weight: bold; /* افزودن ضخامت به متن */
+            font-size: 2.5rem;
+            font-weight: bold; 
             margin-bottom: 20px;
-            text-shadow: 
-                2px 2px 4px rgba(0, 0, 0, 0.1),
-                0 0 10px #ffcc00, /* اضافه کردن چراغ زرد در اطراف متن */
-                0 0 20px #ffcc00,
-                0 0 30px #ffcc00; /* ایجاد اثر چراغی قوی‌تر */
-            transform: rotateX(10deg) rotateY(-5deg); /* ایجاد اثر سه بعدی برای عنوان */
-            transition: transform 0.5s ease, text-shadow 0.5s ease;
-        }
-
-        h1:hover {
-            transform: rotateX(15deg) rotateY(-10deg); /* حرکت بیشتر در حالت هاور */
-            text-shadow: 
-                2px 2px 4px rgba(0, 0, 0, 0.1),
-                0 0 20px #ffcc00, /* افزایش نور در حالت هاور */
-                0 0 40px #ffcc00,
-                0 0 60px #ffcc00; /* ایجاد اثر چراغی قوی‌تر */
+            color: #333; /* رنگ متن عنوان */
+            text-align: center;
         }
 
         input {
             padding: 10px;
-            margin: 10px;
-            font-size: 20px;
-            border: 2px solid #f0a500;
-            border-radius: 25px;
-            width: 250px;
+            margin: 10px 0;
+            font-size: 18px;
+            font-weight: bold; /* ضخیم‌تر کردن متن ورودی */
+            border: 2px solid #ccc;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 300px; /* حداکثر عرض برای ورودی */
             text-align: center;
-            transition: border-color 0.3s ease, transform 0.5s ease, box-shadow 0.3s ease; /* ایجاد انیمیشن سه بعدی */
-            font-family: 'Vazir', Arial, sans-serif;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transform: rotateX(5deg); /* ایجاد اثر سه بعدی اولیه */
+            transition: border-color 0.3s ease; 
         }
 
         input:focus {
-            border-color: #e74c3c;
+            border-color: #f0a500; /* رنگ حاشیه در حالت فوکوس */
             outline: none;
-            transform: scale(1.05) rotateY(10deg); /* ایجاد اثر زوم و چرخش در حالت فوکوس */
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
         }
 
         .button-container {
+            margin: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -73,94 +61,116 @@
 
         button {
             padding: 10px 20px;
-            margin: 10px;
-            font-size: 20px;
+            margin: 10px 0;
+            font-size: 18px;
+            font-weight: bold; /* ضخیم‌تر کردن متن دکمه‌ها */
             cursor: pointer;
             border: none;
             border-radius: 25px;
-            background: linear-gradient(135deg, #ffbe0b, #fb5607);
+            background: #f0a500; /* رنگ دکمه */
             color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.5s ease, background 0.5s ease, box-shadow 0.3s ease;
-            width: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Vazir', Arial, sans-serif;
-            transform: rotateX(5deg) rotateY(-5deg); /* ایجاد اثر سه بعدی اولیه */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease, transform 0.3s ease;
+            width: 100%;
+            max-width: 300px; /* حداکثر عرض برای دکمه */
         }
 
         button:hover {
-            transform: scale(1.1) rotateX(10deg) rotateY(-10deg); /* ایجاد اثر زوم و چرخش بیشتر در حالت هاور */
-            background: linear-gradient(135deg, #fb5607, #ffbe0b);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+            background: #fb5607; /* رنگ دکمه در حالت هاور */
+            transform: translateY(-2px); /* اثر زوم در حالت هاور */
         }
 
         .phone-list {
             margin-top: 20px;
-            width: 300px;
+            width: 100%;
+            max-width: 300px; /* حداکثر عرض لیست شماره‌ها */
             max-height: 200px;
             overflow-y: auto;
-            background: rgba(255, 255, 255, 0.9);
+            background: white; /* رنگ پس‌زمینه لیست */
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transform: rotateX(5deg) rotateY(-5deg); /* ایجاد اثر سه بعدی برای لیست */
-            transition: transform 0.5s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px;
         }
 
         .phone-item {
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
             align-items: center;
             padding: 10px;
             border-bottom: 1px solid #ddd;
-            transition: background 0.3s ease, transform 0.5s ease;
+            margin: 10px;
         }
 
         .phone-item:last-child {
             border-bottom: none;
         }
 
-        .phone-item:hover {
-            background: rgba(240, 165, 7, 0.2);
-            transform: scale(1.05) rotateX(10deg) rotateY(-10deg); /* ایجاد اثر زوم و چرخش بیشتر در حالت هاور */
-        }
-
         .phone-item input[type="text"] {
             width: 70%;
             padding: 5px;
-            font-size: 20px;
+            font-size: 16px;
+            font-weight: bold; /* ضخیم‌تر کردن متن ورودی */
             border: 1px solid #ccc;
             border-radius: 5px;
-            transition: border-color 0.3s ease, transform 0.3s ease;
-            font-family: 'Vazir', Arial, sans-serif;
+            transition: border-color 0.3s ease;
         }
 
         .phone-item input[type="text"]:focus {
-            border-color: #e74c3c;
-            transform: scale(1.05); /* ایجاد اثر زوم در حالت فوکوس */
+            border-color: #f0a500; /* رنگ حاشیه در حالت فوکوس */
         }
 
         .phone-item button {
-            width: auto;
             padding: 5px 10px;
             font-size: 16px;
-            background: linear-gradient(135deg, #e74c3c, #ff006e);
+            font-weight: bold; /* ضخیم‌تر کردن متن دکمه حذف */
+            background: #e74c3c; /* رنگ دکمه حذف */
             color: white;
             border: none;
             border-radius: 5px;
-            transition: background 0.3s ease, transform 0.3s ease;
-            font-family: 'Vazir', Arial, sans-serif;
+            transition: background 0.3s ease;
         }
 
         .phone-item button:hover {
-            background: linear-gradient(135deg, #ff006e, #e74c3c);
-            transform: scale(1.1); /* ایجاد اثر زوم در حالت هاور */
+            background: #ff006e; /* رنگ دکمه حذف در حالت هاور */
+            padding: 5px 10px;
+            font-size: 14px;
+            font-weight: bold; /* ضخیم‌تر کردن متن دکمه حذف */
+            background: #e74c3c; /* رنگ دکمه حذف */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            
+        }
+
+        .phone-item button:hover {
+            background: #ff006e; /* رنگ دکمه حذف در حالت هاور */
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem; /* کاهش اندازه عنوان برای دستگاه‌های کوچک‌تر */
+            }
+
+            input, button {
+                font-size: 16px; /* کاهش اندازه متن ورودی و دکمه‌ها */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem; /* کاهش اندازه عنوان برای دستگاه‌های موبایل */
+            }
+
+            input, button {
+                font-size: 14px; /* کاهش اندازه متن ورودی و دکمه‌ها */
+            }
         }
     </style>
 </head>
 <body>
-    <h1>مدیریت پیامک‌ها و شماره‌های تلفن</h1>
+    <h1>پیامک سریع</h1>
     
     <!-- Input for adding new phone number -->
     <input type="text" id="newPhoneNumber" placeholder="شماره تلفن جدید را وارد کنید">
@@ -175,9 +185,6 @@
         </button>
         <button onclick="sendSMS('سلام مامان، تعطیل شدم!')">
             ارسال پیام «تعطیل شدم» ⏰
-        </button>
-        <button onclick="sendCustomSMS()">
-            ارسال پیام با زمان و تاریخ 📅
         </button>
     </div>
 
@@ -256,25 +263,6 @@
                 alert('لطفاً شماره تلفن را اضافه کنید.');
                 return;
             }
-            const url = `sms:${selectedPhoneNumber}?body=${encodeURIComponent(message)}`;
-            window.location.href = url; // Redirect to SMS app
-        }
-
-        // Function to send custom SMS with date and time
-        function sendCustomSMS() {
-            const selectedPhoneNumber = phoneNumbers[0];
-            if (!selectedPhoneNumber) {
-                alert('لطفاً شماره تلفن را اضافه کنید.');
-                return;
-            }
-
-            const now = jalaliMoment().locale('fa'); // Get current Jalali date and time
-            const dayOfWeek = now.format('dddd'); // Day of the week
-            const jalaliDate = now.format('jYYYY/jMM/jDD'); // Jalali date
-            const time = now.format('HH:mm'); // Current time
-
-            const message = `در ${dayOfWeek}، تاریخ ${jalaliDate} ساعت ${time} این پیام ارسال شده است.`;
-
             const url = `sms:${selectedPhoneNumber}?body=${encodeURIComponent(message)}`;
             window.location.href = url; // Redirect to SMS app
         }
