@@ -8,12 +8,13 @@
     <link href="https://cdn.fontiran.com/vazir.css" rel="stylesheet"> <!-- لینک به فونت Vazir -->
     <script src="https://cdn.jsdelivr.net/npm/jalali-moment@3.3.3/min/jquery.jalali-moment.min.js"></script> <!-- جالالی مومنت برای تاریخ شمسی -->
     <style>
-        *{
-           font-family: 'Vazir', sans-serif;
-           border-radius: 10px;
-           max-width: 600px;
-           min-width: 320px;
+        * {
+            font-family: 'Vazir', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* اضافه کردن box-sizing برای مدیریت بهتر */
         }
+
         body {
             font-family: 'Vazir', sans-serif; /* استفاده از فونت وزیر برای تمام متن‌ها */
             display: flex;
@@ -22,27 +23,28 @@
             justify-content: center;
             min-height: 100vh;
             background: #333333; /* رنگ پس‌زمینه ملایم */
-            margin: 0;
             color: #333;
-            font-size: 18px;
             padding: 20px;
         }
+
         .container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: #ffffff; /* رنگ پس‌زمینه کادر */
+            background: #363636; /* رنگ پس‌زمینه کادر */
             padding: 20px;
+            box-shadow: #f0a500 0 0 10px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        
             margin: 20px;
+            width: 100%; /* عرض کامل */
+            max-width: 600px; /* حداکثر عرض */
         }
+
         h1 {
-            max-width: 600px;
-            min-width: 320px;
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin: 10px;
             padding: 10px;
             box-shadow: #f0a500 0 0 10px;
@@ -50,7 +52,6 @@
             font-weight: bold; 
             margin-bottom: 20px;
             color: #ffffff; /* رنگ متن عنوان */
-            text-align: center;
         }
 
         input {
@@ -87,11 +88,6 @@
             border: none;
             border-radius: 15px;
             background: #f0a500; /* رنگ دکمه */
-           max-width: 600px;
-           border: #000000 1px solid;
-           
-           min-width: 350px;
-        
             color: rgb(0, 0, 0);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background 0.3s ease, transform 0.3s ease;
@@ -105,6 +101,11 @@
         }
 
         .phone-list {
+            display: flex;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             margin-top: 20px;
             width: 100%;
             max-width: 300px; /* حداکثر عرض لیست شماره‌ها */
@@ -114,25 +115,24 @@
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 10px;
-             max-width: 330px;
-           border: #000000 1px solid;
-          
-           min-width: 200px;
         }
 
         .phone-item {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            background: #f0a500; /* رنگ پس‌زمینه آیتم‌ها */
+            color: white; /* رنگ متن آیتم‌ها */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .phone-item p {
             padding: 10px;
             border-bottom: 1px solid #ddd;
-            margin: 10px;
-             max-width: 600px;
-           
-          
-           min-width: 100px;
-            
         }
 
         .phone-item:last-child {
@@ -147,16 +147,13 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             transition: border-color 0.3s ease;
-            
         }
 
         .phone-item input[type="text"]:focus {
-            
             border-color: #000000; /* رنگ حاشیه در حالت فوکوس */
         }
 
         .phone-item button {
-            
             padding: 5px 10px;
             font-size: 16px;
             font-weight: bold; /* ضخیم‌تر کردن متن دکمه حذف */
@@ -165,36 +162,6 @@
             border: none;
             border-radius: 5px;
             transition: background 0.3s ease;
-             max-width: 600px;
-           border: #000000 1px solid;
-           
-           min-width: 100px;
-            
-        }
-
-        .phone-item button:hover {
-            background: #ff006e; /* رنگ دکمه حذف در حالت هاور */
-            padding: 5px 10px;
-            padding: 5px 10px;
-            font-size: 16px;
-            font-weight: bold; /* ضخیم‌تر کردن متن دکمه حذف */
-            background: #333333; /* رنگ دکمه حذف */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            transition: background 0.3s ease;
-        }
-
-        .phone-item button:hover {
-            background: #ff006e; /* رنگ دکمه حذف در حالت هاور */
-            padding: 5px 10px;
-            font-size: 14px;
-            font-weight: bold; /* ضخیم‌تر کردن متن دکمه حذف */
-            background: #e74c3c; /* رنگ دکمه حذف */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            
         }
 
         .phone-item button:hover {
@@ -221,31 +188,27 @@
                 font-size: 14px; /* کاهش اندازه متن ورودی و دکمه‌ها */
             }
         }
-         *{
-           font-family: 'Vazir', sans-serif;
-           border-radius: 10px;
-           max-width: 600px;
-           min-width: 320px;
-        }
     </style>
 </head>
 <body>
-    <h1>پیامک سریع</h1>
-    
-    <!-- Input for adding new phone number -->
-    <input type="text" id="newPhoneNumber" placeholder="شماره تلفن جدید را وارد کنید">
-    <button onclick="addPhoneNumber()">افزودن شماره 📱</button>
+    <div class="container">
+        <h1>پیامک سریع</h1>
+        
+        <!-- Input for adding new phone number -->
+        <input type="text" id="newPhoneNumber" placeholder="شماره تلفن جدید را وارد کنید">
+        <button onclick="addPhoneNumber()">افزودن شماره 📱</button>
 
-    <!-- List of phone numbers -->
-    <div class="phone-list" id="phoneList"></div>
+        <!-- List of phone numbers -->
+        <div class="phone-list" id="phoneList"></div>
 
-    <div class="button-container">
-        <button onclick="sendSMS('سلام مامان، رسیدم!')">
-            ارسال پیام «رسیدم» ✅
-        </button>
-        <button onclick="sendSMS('سلام مامان، تعطیل شدم!')">
-            ارسال پیام «تعطیل شدم» ⏰
-        </button>
+        <div class="button-container">
+            <button onclick="sendSMS('سلام مامان، رسیدم!')">
+                ارسال پیام «رسیدم» ✅
+            </button>
+            <button onclick="sendSMS('سلام مامان، تعطیل شدم!')">
+                ارسال پیام «تعطیل شدم» ⏰
+            </button>
+        </div>
     </div>
 
     <script>
