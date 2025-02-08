@@ -11,6 +11,8 @@
         *{
            font-family: 'Vazir', sans-serif;
            border-radius: 10px;
+           max-width: 600px;
+           min-width: 320px;
         }
         body {
             font-family: 'Vazir', sans-serif; /* استفاده از فونت وزیر برای تمام متن‌ها */
@@ -19,18 +21,35 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background: #f0f0f0; /* رنگ پس‌زمینه ملایم */
+            background: #333333; /* رنگ پس‌زمینه ملایم */
             margin: 0;
             color: #333;
             font-size: 18px;
             padding: 20px;
         }
-
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: #ffffff; /* رنگ پس‌زمینه کادر */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
         h1 {
-            font-size: 2.5rem;
+            max-width: 600px;
+            min-width: 320px;
+            font-size: 2rem;
+            margin: 10px;
+            padding: 10px;
+            box-shadow: #f0a500 0 0 10px;
+            text-shadow: #000000 0 0 3px;
             font-weight: bold; 
             margin-bottom: 20px;
-            color: #333; /* رنگ متن عنوان */
+            color: #ffffff; /* رنگ متن عنوان */
             text-align: center;
         }
 
@@ -66,9 +85,14 @@
             font-weight: bold; /* ضخیم‌تر کردن متن دکمه‌ها */
             cursor: pointer;
             border: none;
-            border-radius: 25px;
+            border-radius: 15px;
             background: #f0a500; /* رنگ دکمه */
-            color: white;
+           max-width: 600px;
+           border: #000000 1px solid;
+           
+           min-width: 350px;
+        
+            color: rgb(0, 0, 0);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background 0.3s ease, transform 0.3s ease;
             width: 100%;
@@ -90,6 +114,10 @@
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 10px;
+             max-width: 330px;
+           border: #000000 1px solid;
+          
+           min-width: 200px;
         }
 
         .phone-item {
@@ -100,6 +128,11 @@
             padding: 10px;
             border-bottom: 1px solid #ddd;
             margin: 10px;
+             max-width: 600px;
+           
+          
+           min-width: 100px;
+            
         }
 
         .phone-item:last-child {
@@ -114,17 +147,38 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             transition: border-color 0.3s ease;
+            
         }
 
         .phone-item input[type="text"]:focus {
-            border-color: #f0a500; /* رنگ حاشیه در حالت فوکوس */
+            
+            border-color: #000000; /* رنگ حاشیه در حالت فوکوس */
         }
 
         .phone-item button {
+            
             padding: 5px 10px;
             font-size: 16px;
             font-weight: bold; /* ضخیم‌تر کردن متن دکمه حذف */
-            background: #e74c3c; /* رنگ دکمه حذف */
+            background: #333333; /* رنگ دکمه حذف */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+             max-width: 600px;
+           border: #000000 1px solid;
+           
+           min-width: 100px;
+            
+        }
+
+        .phone-item button:hover {
+            background: #ff006e; /* رنگ دکمه حذف در حالت هاور */
+            padding: 5px 10px;
+            padding: 5px 10px;
+            font-size: 16px;
+            font-weight: bold; /* ضخیم‌تر کردن متن دکمه حذف */
+            background: #333333; /* رنگ دکمه حذف */
             color: white;
             border: none;
             border-radius: 5px;
@@ -166,6 +220,12 @@
             input, button {
                 font-size: 14px; /* کاهش اندازه متن ورودی و دکمه‌ها */
             }
+        }
+         *{
+           font-family: 'Vazir', sans-serif;
+           border-radius: 10px;
+           max-width: 600px;
+           min-width: 320px;
         }
     </style>
 </head>
