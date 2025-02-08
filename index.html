@@ -8,7 +8,7 @@
     <link href="https://cdn.fontiran.com/vazir.css" rel="stylesheet"> <!-- لینک به فونت Vazir -->
     <style>
         body {
-            font-family: 'Vazir', Arial, sans-serif; /* استفاده از فونت Vazir */
+            font-family: 'Vazir', Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -17,54 +17,74 @@
             background: linear-gradient(135deg, #f7d794, #f0a500);
             margin: 0;
             color: #333;
-            font-size: 20px; /* بزرگتر کردن اندازه متن در کل صفحه */
+            font-size: 20px;
+            perspective: 1000px; /* ایجاد اثر سه بعدی */
         }
+
         h1 {
-            font-size: 3rem; /* بزرگتر کردن اندازه عنوان */
+            font-size: 3rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            transform: rotateX(10deg) rotateY(-5deg); /* ایجاد اثر سه بعدی برای عنوان */
+            transition: transform 0.5s ease;
         }
+
+        h1:hover {
+            transform: rotateX(15deg) rotateY(-10deg); /* حرکت بیشتر در حالت هاور */
+        }
+
         input {
             padding: 10px;
             margin: 10px;
-            font-size: 20px; /* بزرگتر کردن اندازه متن ورودی */
+            font-size: 20px;
             border: 2px solid #f0a500;
             border-radius: 25px;
             width: 250px;
             text-align: center;
-            transition: border-color 0.3s ease;
-            font-family: 'Vazir', Arial, sans-serif; /* فونت ورودی */
+            transition: border-color 0.3s ease, transform 0.5s ease, box-shadow 0.3s ease; /* ایجاد انیمیشن سه بعدی */
+            font-family: 'Vazir', Arial, sans-serif;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: rotateX(5deg); /* ایجاد اثر سه بعدی اولیه */
         }
+
         input:focus {
             border-color: #e74c3c;
             outline: none;
+            transform: scale(1.05) rotateY(10deg); /* ایجاد اثر زوم و چرخش در حالت فوکوس */
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
         }
+
         .button-container {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
         button {
             padding: 10px 20px;
             margin: 10px;
-            font-size: 20px; /* بزرگتر کردن اندازه متن دکمه */
+            font-size: 20px;
             cursor: pointer;
             border: none;
             border-radius: 25px;
             background: linear-gradient(135deg, #ffbe0b, #fb5607);
             color: white;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease, background 0.3s ease;
+            transition: transform 0.5s ease, background 0.5s ease, box-shadow 0.3s ease;
             width: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Vazir', Arial, sans-serif; /* فونت دکمه */
+            font-family: 'Vazir', Arial, sans-serif;
+            transform: rotateX(5deg) rotateY(-5deg); /* ایجاد اثر سه بعدی اولیه */
         }
+
         button:hover {
-            transform: scale(1.05);
+            transform: scale(1.1) rotateX(10deg) rotateY(-10deg); /* ایجاد اثر زوم و چرخش بیشتر در حالت هاور */
             background: linear-gradient(135deg, #fb5607, #ffbe0b);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
         }
+
         .phone-list {
             margin-top: 20px;
             width: 300px;
@@ -73,46 +93,58 @@
             background: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: rotateX(5deg) rotateY(-5deg); /* ایجاد اثر سه بعدی برای لیست */
+            transition: transform 0.5s ease;
         }
+
         .phone-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px;
             border-bottom: 1px solid #ddd;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.5s ease;
         }
+
         .phone-item:last-child {
             border-bottom: none;
         }
+
         .phone-item:hover {
             background: rgba(240, 165, 7, 0.2);
+            transform: scale(1.05) rotateX(10deg) rotateY(-10deg); /* ایجاد اثر زوم و چرخش بیشتر در حالت هاور */
         }
+
         .phone-item input[type="text"] {
             width: 70%;
             padding: 5px;
-            font-size: 20px; /* بزرگتر کردن اندازه متن ورودی شماره */
+            font-size: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            transition: border-color 0.3s ease;
-            font-family: 'Vazir', Arial, sans-serif; /* فونت ورودی شماره */
+            transition: border-color 0.3s ease, transform 0.3s ease;
+            font-family: 'Vazir', Arial, sans-serif;
         }
+
         .phone-item input[type="text"]:focus {
             border-color: #e74c3c;
+            transform: scale(1.05); /* ایجاد اثر زوم در حالت فوکوس */
         }
+
         .phone-item button {
             width: auto;
             padding: 5px 10px;
-            font-size: 16px; /* بزرگتر کردن اندازه متن دکمه حذف */
+            font-size: 16px;
             background: linear-gradient(135deg, #e74c3c, #ff006e);
             color: white;
             border: none;
             border-radius: 5px;
-            transition: background 0.3s ease;
-            font-family: 'Vazir', Arial, sans-serif; /* فونت دکمه حذف */
+            transition: background 0.3s ease, transform 0.3s ease;
+            font-family: 'Vazir', Arial, sans-serif;
         }
+
         .phone-item button:hover {
             background: linear-gradient(135deg, #ff006e, #e74c3c);
+            transform: scale(1.1); /* ایجاد اثر زوم در حالت هاور */
         }
     </style>
 </head>
@@ -210,7 +242,6 @@
                 alert('لطفاً شماره تلفن را اضافه کنید.');
                 return;
             }
-
             const url = `sms:${selectedPhoneNumber}?body=${encodeURIComponent(message)}`;
             window.location.href = url; // Redirect to SMS app
         }
